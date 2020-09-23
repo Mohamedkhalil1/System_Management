@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSettingsTranslationsTable extends Migration
+class CreateBranchesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,12 @@ class CreateSettingsTranslationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('settings_translations', function (Blueprint $table) {
+        Schema::create('branches', function (Blueprint $table) {
             $table->id();
-            $table->integer('settings_id')->unsigned();
-            $table->string('locale');
-            $table->text('value')->nullable();
-            $table->unique(['setting_id','locale']);
+            $table->string('name',20);
+            $table->string('address',50);
+            $table->string('city',15);
+            $table->integer('admin_id');
             $table->timestamps();
         });
     }
@@ -30,6 +30,6 @@ class CreateSettingsTranslationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('settings_translations');
+        Schema::dropIfExists('branches');
     }
 }

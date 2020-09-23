@@ -15,53 +15,6 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 */
 
 define('PAGINATION_COUNT',10);
-
-Route::group(['namespace' =>'Admin','middleware' => 'auth:admin'], function () {
-    ###########################################################################
-    /* Languages Routes
-    Route::group(['prefix' => 'languages'], function () {
-        Route::get('/','LanguagesController@index')->name('admin.languages');
-        Route::get('/create','LanguagesController@create')->name('admin.languages.create');
-        Route::post('/','LanguagesController@store')->name('admin.languages.store');
-        Route::get('edit/{id}','LanguagesController@edit')->name('admin.languages.edit');
-        Route::post('update/{id}','LanguagesController@update')->name('admin.languages.update');
-        Route::get('delete/{id}','LanguagesController@destory')->name('admin.languages.destory');
-    });
-    /* end languages Routes */
-
-
-    ###########################################################################
-    /* Main Categories Routes 
-    Route::group(['prefix' => 'main_categories'], function () {
-        Route::get('/','MainCategoriesController@index')->name('admin.maincategories');
-        Route::get('/create','MainCategoriesController@create')->name('admin.maincategories.create');
-        Route::post('/','MainCategoriesController@store')->name('admin.maincategories.store');
-        Route::get('edit/{id}','MainCategoriesController@edit')->name('admin.maincategories.edit');
-        Route::post('update/{id}','MainCategoriesController@update')->name('admin.maincategories.update');
-        Route::get('delete/{id}','MainCategoriesController@destory')->name('admin.maincategories.destory');
-        Route::get('changeStatus/{id}','MainCategoriesController@changeStatus')->name('admin.maincategories.status');
-    });
-    /* end Main Categories Routes */
-
-     ###########################################################################
-    /* Main Vendors Routes 
-    Route::group(['prefix' => 'vendors'], function () {
-        Route::get('/','VendorsController@index')->name('admin.vendors');
-        Route::get('/create','VendorsController@create')->name('admin.vendors.create');
-        Route::post('/','VendorsController@store')->name('admin.vendors.store');
-        Route::get('edit/{id}','VendorsController@edit')->name('admin.vendors.edit');
-        Route::post('update/{id}','VendorsController@update')->name('admin.vendors.update');
-        Route::get('delete/{id}','VendorsController@destory')->name('admin.vendors.destory');
-        Route::get('changeStatus/{id}','VendorsController@changeStatus')->name('admin.vendors.status');
-    });
-    /* end Vendors Routes */
-
-    ###############################################################################
-   
-});
-
-
-
 Route::group(
     [
         'prefix' => LaravelLocalization::setLocale(),
