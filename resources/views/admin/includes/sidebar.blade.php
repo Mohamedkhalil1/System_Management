@@ -6,49 +6,48 @@
               class="menu-title" data-i18n="nav.add_on_drag_drop.main">الرئيسية </span></a>
           </li>
 
-          <span class="badge badge badge-success badge-pill float-right mr-1 mt-1">3</span>
+          <span class="badge badge badge-success badge-pill float-right mr-1 mt-1">{{App\Models\Branch::count()}}</span>
           <li class="nav-item"><a href=""><i class="la la-building"></i><span
               class="menu-title" data-i18n="nav.add_on_drag_drop.main">الفروع </span></a>
           </li>
           
-          <span class="badge badge badge-primary badge-pill float-right mr-1 mt-1">0</span>
+          <span class="badge badge badge-primary badge-pill float-right mr-1 mt-1">{{App\Models\Category::count()}}</span>
           <li class="nav-item "><a href=""><i class="ft-tag"></i><span
               class="menu-title" data-i18n="nav.add_on_drag_drop.main">الاصناف </span></a>
           </li>
 
-          <span class="badge badge badge-danger badge-pill float-right mr-1 mt-1">0</span>
+          <span class="badge badge badge-danger badge-pill float-right mr-1 mt-1">{{App\Models\Product::count()}}</span>
           <li class="nav-item"><a href=""><i class="icon-grid"></i><span
               class="menu-title" data-i18n="nav.add_on_drag_drop.main">المنتجات </span></a>
           </li>
 
-          <span class="badge badge badge-warning badge-pill float-right mr-1 mt-1">0</span>
+          <span class="badge badge badge-warning badge-pill float-right mr-1 mt-1">{{App\Models\Employee::count()}}</span>
           <li class="nav-item"><a href=""><i class="la la-users"></i><span
               class="menu-title" data-i18n="nav.add_on_drag_drop.main">الموظفين </span></a>
           </li>
 
-          <span class="badge badge badge-secondary badge-pill float-right mr-1 mt-1">0</span>
+          <span class="badge badge badge-secondary badge-pill float-right mr-1 mt-1">{{App\Models\Supplier::count()}}</span>
           <li class="nav-item "><a href=""><i class="icon-users"></i><span
               class="menu-title" data-i18n="nav.add_on_drag_drop.main">المزودين </span></a>
           </li>
 
           
-          <span class="badge badge badge-info badge-pill float-right mr-1 mt-1">0</span>
+          <span class="badge badge badge-info badge-pill float-right mr-1 mt-1">{{App\Models\Client::count()}}</span>
           <li class="nav-item"><a href=""><i class="ft-users"></i><span
               class="menu-title" data-i18n="nav.add_on_drag_drop.main"> العملاء </span></a>
           </li>
 
-         
-
+          
           <li class="nav-item open"><a href=""><i class="la la-money"></i>
               <span class="menu-title" data-i18n="nav.dash.main"> الفواتير </span>
               <span
-              class="badge badge badge-dark badge-pill float-right mr-2">0</span>
+              class="badge badge badge-dark badge-pill float-right mr-2">{{App\Models\Invoice::count()}}</span>
           </a>
               <ul class="menu-content">
                   <li class="active"><a class="menu-item" href=""
                                         data-i18n="nav.dash.ecommerce">فواتير الشركه</a>
                   </li>
-                  <li><a class="menu-item" href="" data-i18n="nav.dash.crypto">قواتير المزودين </a>
+                  <li class="active"><a class="menu-item" href="" data-i18n="nav.dash.crypto">قواتير المزودين </a>
                   </li>
               </ul>
           </li>

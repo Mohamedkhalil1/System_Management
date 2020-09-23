@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAdminsTable extends Migration
+class CreateInvoicesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,13 @@ class CreateAdminsTable extends Migration
      */
     public function up()
     {
-        Schema::create('admins', function (Blueprint $table) {
+        Schema::create('invoices', function (Blueprint $table) {
             $table->id();
-            $table->string('name',50);
-            $table->string('email',50);
-            $table->string('password',150);
+            $table->string('date',50);
+            $table->string('price',11);
+            $table->string('type');
+            $table->integer('client_id')->unsigned()->nullable();
+            $table->integer('supplier_id')->unsigned()->nullable();
             $table->timestamps();
         });
     }
@@ -29,6 +31,6 @@ class CreateAdminsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('admins');
+        Schema::dropIfExists('invoices');
     }
 }
