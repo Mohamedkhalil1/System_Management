@@ -18,18 +18,18 @@
           </li>
 
           <span class="badge badge badge-warning badge-pill float-right mr-1 mt-1">{{App\Models\Employee::count()}}</span>
-          <li class="nav-item"><a href=""><i class="la la-users"></i><span
+          <li class="nav-item"><a href="{{route('admin.employees')}}"><i class="la la-users"></i><span
               class="menu-title" data-i18n="nav.add_on_drag_drop.main">الموظفين </span></a>
           </li>
 
           <span class="badge badge badge-secondary badge-pill float-right mr-1 mt-1">{{App\Models\Supplier::count()}}</span>
-          <li class="nav-item "><a href=""><i class="icon-users"></i><span
+          <li class="nav-item "><a href="{{route('admin.suppliers')}}"><i class="icon-users"></i><span
               class="menu-title" data-i18n="nav.add_on_drag_drop.main">المزودين </span></a>
           </li>
 
           
           <span class="badge badge badge-info badge-pill float-right mr-1 mt-1">{{App\Models\Client::count()}}</span>
-          <li class="nav-item"><a href=""><i class="ft-users"></i><span
+          <li class="nav-item"><a href="{{route('admin.clients')}}"><i class="ft-users"></i><span
               class="menu-title" data-i18n="nav.add_on_drag_drop.main"> العملاء </span></a>
           </li>
 

@@ -12,15 +12,24 @@ class BranchController extends Controller
 {
     public function index()
     {
-        $branches =  Branch::select()->get();
-        return view('admin.branches.index',compact('branches'));
+        try{
+            $branches =  Branch::select()->get();
+            return view('admin.branches.index',compact('branches'));
+        }catch(\Exception $ex){
+            return redirect()->route('admin.branches')->with(['error' => 'حدث مشكله جرب مره اخرى']);
+        }
+        
     }
 
    
     public function create()
     {
-        $admins = Admin::select()->get();
-        return view('admin.branches.create',compact('admins'));
+        try{
+            $admins = Admin::select()->get();
+            return view('admin.branches.create',compact('admins'));
+        }catch(\Exception $ex){
+            return redirect()->route('admin.branches')->with(['error' => 'حدث مشكله جرب مره اخرى']);
+        }
     }
 
     public function store(BranchReuqest $request)
@@ -37,9 +46,17 @@ class BranchController extends Controller
 
     public function show($id)
     {
-        $branch =  Branch::find($id);
-        $products = $branch->products;
-        return view('admin.branches.show',compact('branch','products'));
+        try{
+            $branch =  Branch::find($id);
+            if($branch === null){
+                return redirect()->route('admin.branches')->with(['error' => ' هذا الفرع غير موجود']);
+            }
+            $products = $branch->products;
+            return view('admin.branches.show',compact('branch','products'));
+        }catch(\Exception $ex){
+            return redirect()->route('admin.branches')->with(['error' => 'حدث مشكله جرب مره اخرى']);
+        }
+       
     }
 
     public function edit($id)
@@ -47,6 +64,9 @@ class BranchController extends Controller
         try{
             $admins = Admin::select()->get();
             $branch = Branch::find($id);
+            if($branch === null){
+                return redirect()->route('admin.branches')->with(['error' => ' هذا الفرع غير موجود']);
+            }
             return view('admin.branches.edit',compact('admins','branch'));
         }catch(\Exception $ex){
             return redirect()->route('admin.branches')->with(['error' => 'حدث مشكله جرب مره اخرى']);
@@ -69,7 +89,7 @@ class BranchController extends Controller
     public function destroy($id)
     {
         try{
-            Branch::find($id)->delete();
+            Branch::findOrFail($id)->delete();
             return redirect()->route('admin.branches')->with(['success' => 'تم حذف الفرع بنجاح']);
         }
         catch(\Exception $ex){

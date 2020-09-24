@@ -11,9 +11,9 @@
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="/">الرئيسية </a>
                                 </li>
-                                <li class="breadcrumb-item"><a href="{{route('admin.branches')}}"> الفروع </a>
+                                <li class="breadcrumb-item"><a href="{{route('admin.employees')}}"> الموظفين </a>
                                 </li>
-                                <li class="breadcrumb-item active">إضافة فرع 
+                                <li class="breadcrumb-item active">تحديث الموظف 
                                 </li>
                             </ol>
                         </div>
@@ -27,7 +27,7 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title" id="basic-layout-form"> إضافة فرع جديد </h4>
+                                    <h4 class="card-title" id="basic-layout-form"> تحديث الموظف  </h4>
                                     <a class="heading-elements-toggle"><i
                                             class="la la-ellipsis-v font-medium-3"></i></a>
                                     <div class="heading-elements">
@@ -43,17 +43,19 @@
                                 @include('admin.includes.alerts.errors')
                                 <div class="card-content collapse show">
                                     <div class="card-body">
-                                        <form class="form" action="{{route('admin.branches.store')}}" method="POST">
+                                        <form class="form" action="{{route('admin.employees.update',$employee->id)}}" method="POST">
                                             @csrf
+                                            @method('put')
+                                            
                                             <div class="form-body">
-                                                <h4 class="form-section"><i class="ft-home"></i> بيانات الفرع </h4>
+                                                <h4 class="form-section"><i class="ft-home"></i> بيانات الموظف </h4>
                                                 <div class="row">
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label for="projectinput1"> اسم الفرع </label>
-                                                            <input type="text" value="{{old('name')}}" id="name"
+                                                            <label for="projectinput1"> اسم العميل </label>
+                                                            <input type="text" value="{{$employee->name}}" id="name"
                                                                     class="form-control"
-                                                                    placeholder="اسم الفرع"
+                                                                    placeholder="اسم الموظف"
                                                                     name="name">
                                                             @error("name")
                                                             <span class="text-danger"> {{ $message }} </span>
@@ -63,32 +65,12 @@
 
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label for="projectinput2"> أختر المسئول </label>
-                                                            <select name="admin_id" class="form-control">
-                                                                <optgroup label="من فضلك أختر المسئول ">
-                                                                    @if($admins && $admins-> count() > 0)
-                                                                        @foreach($admins as $admin)
-                                                                            <option
-                                                                                value="{{$admin->id}}">{{$admin->name}}</option>
-                                                                        @endforeach
-                                                                    @endif
-                                                                </optgroup>
-                                                            </select>
-                                                            @error('admin_id')
-                                                            <span class="text-danger"> {{$message}}</span>
-                                                            @enderror
-                                                        </div>
-                                                    </div>
-                                                    
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label for="projectinput1"> عنوان الفرع </label>
+                                                            <label for="projectinput1"> عنوان الموظف </label>
                                                             <input type="text" id="abbr"
                                                                     class="form-control"
-                                                                    placeholder="عنوان الفرع"
-                                                                    value="{{old('address')}}"
+                                                                    placeholder="عنوان الموظف"
+                                                                    value="{{$employee->address}}"
                                                                     name="address">
-
                                                             @error("address")
                                                             <span class="text-danger"> {{ $message }} </span>
                                                             @enderror
@@ -97,15 +79,49 @@
 
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label for="projectinput1"> المدينه </label>
-                                                            <input type="text" id="city"
+                                                            <label for="projectinput1"> البريد الالكتروني </label>
+                                                            <input type="email" id="city"
                                                                     class="form-control"
-                                                                    placeholder="عنوان الفرع"
-                                                                    value="{{old('city')}}"
-                                                                    name="city">
+                                                                    placeholder="البريد الالكتروني الخاص بالموظف"
+                                                                    value="{{$employee->email}}"
+                                                                    name="email">
 
-                                                            @error("city")
+                                                            @error("email")
                                                             <span class="text-danger"> {{ $message }} </span>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="projectinput1"> رقم الهاتف </label>
+                                                            <input type="number" id="phone"
+                                                                    class="form-control"
+                                                                    placeholder="رقم الهاتف الخاص بالموظف"
+                                                                    value="{{$employee->phone}}"
+                                                                    name="phone">
+
+                                                            @error("phone")
+                                                            <span class="text-danger"> {{ $message }} </span>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-12">
+                                                        <div class="form-group">
+                                                            <label for="projectinput2"> أختر الفرع </label>
+                                                            <select name="branch_id" class=" form-control">
+                                                                <optgroup label="من فضلك أختر الفرع ">
+                                                                    @if($branches && $branches-> count() > 0)
+                                                                        @foreach($branches as $branch)
+                                                                            <option
+                                                                                value="{{$branch->id}}"  @if(isset($employee->branch) && $employee->branch->id === $branch->id ) selected @endif>{{$branch->name}}</option>
+                                                                        @endforeach
+                                                                    @endif
+                                                                </optgroup>
+                                                            </select>
+                                                            @error('branch_id')
+                                                            <span class="text-danger"> {{$message}}</span>
                                                             @enderror
                                                         </div>
                                                     </div>
@@ -120,7 +136,7 @@
                                                     <i class="ft-x"></i> تراجع
                                                 </button>
                                                 <button type="submit" class="btn btn-primary">
-                                                    <i class="la la-check-square-o"></i> حفظ
+                                                    <i class="la la-check-square-o"></i> تحديث
                                                 </button>
                                             </div>
                                         </form>
