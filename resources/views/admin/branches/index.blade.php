@@ -4,20 +4,23 @@
     <div class="app-content content">
         <div class="content-wrapper">
             <div class="content-header row">
-                <div class="content-header-left col-md-6 col-12 mb-2">
-                    <h3 class="content-header-title"> الاقسام الرئيسية </h3>
+                <div class="content-header-left col-md-6 col-12 mb-1">
+                    <h3 class="content-header-title"> الفروع </h3>
                     <div class="row breadcrumbs-top">
                         <div class="breadcrumb-wrapper col-12">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">الرئيسية</a>
                                 </li>
-                                <li class="breadcrumb-item active"> ألمتاجر
+                                <li class="breadcrumb-item active"> الفروع
                                 </li>
                             </ol>
                         </div>
                     </div>
                 </div>
             </div>
+            <div class="heading-elements mb-2">
+                <a href="{{route('admin.branches.create')}}" class="btn btn-success btn-sm"><i class="ft-plus white"></i> اضافه فرع جديد</a>
+              </div>
             <div class="content-body">
                 <!-- DOM - jQuery events table -->
                 <section id="dom">
@@ -25,7 +28,7 @@
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title">جميع المتاجر </h4>
+                                    <h4 class="card-title">جميع الفروع </h4>
                                     <a class="heading-elements-toggle"><i
                                             class="la la-ellipsis-v font-medium-3"></i></a>
                                     <div class="heading-elements">
@@ -42,55 +45,44 @@
                                 @include('admin.includes.alerts.errors')
 
                                 <div class="card-content collapse show">
-                                    <div class="card-body card-dashboard">
+                                    <div class="card-body card-dashboard table-responsive">
                                         <table
-                                            class="table display nowrap table-striped table-bordered scroll-horizontal">
+                                            class="table table-de display nowrap table-striped table-bordered mb-0">
                                             <thead class="">
                                             <tr>
                                                 <th>الاسم</th>
-                                                <th> اللوجو</th>
-                                                <th>الهاتف</th>
-                                                <th>القسم الرئيسي</th>
-                                                <th> ألحالة </th>
+                                                <th> المدينه</th>
+                                                 <th>العنوان</th>
+                                                 <th>المسئول</th>
                                                 <th>الإجراءات</th>
                                             </tr>
                                             </thead>
                                             <tbody>
 
-                                            @isset($vendors)
-                                                @foreach($vendors as $vendor)
+                                            @isset($branches)
+                                                @foreach($branches as $branch)
                                                     <tr>
-                                                        <td>{{$vendor -> name}}</td>
-                                                        <td><img style="width: 150px; height: 100px;"
-                                                                 src="{{$vendor -> 	logo}}"></td>
-
-                                                        <td>{{$vendor -> mobile}}</td>
-                                                        <td> {{$vendor -> 	category -> name}}</td>
-
-                                                        <td> {{$vendor -> getActive()}}</td>
+                                                        <td><a href="{{route('admin.branches.show',$branch->id)}}">{{$branch->name}}</a></td>
+                                                        <td>{{$branch->city}}</td>
+                                                        <td>{{$branch->address}}</td>
+                                                        <td>{{$branch->admin ?  $branch->admin->name : '' }}</td>
                                                         <td>
                                                             <div class="btn-group" role="group"
                                                                  aria-label="Basic example">
-                                                                <a href="{{route('admin.vendors.edit',$vendor -> id)}}"
-                                                                   class="btn btn-outline-primary btn-min-width box-shadow-3 mr-1 mb-1">تعديل</a>
+                                                                <a href="{{route('admin.branches.edit',$branch -> id)}}"
+                                                                   class="btn btn-outline-primary box-shadow-3 mr-1 mb-1 btn-sm"><i class="ft-edit"></i></a>
 
-
-                                                                <a href="{{route('admin.vendors.destory',$vendor -> id)}}"
-                                                                   class="btn btn-outline-danger btn-min-width box-shadow-3 mr-1 mb-1">حذف</a>
-
-                                                                   <a href="{{route('admin.vendors.status',$vendor->id)}}"
-                                                                    class="btn btn-outline-warning btn-min-width box-shadow-3 mr-1 mb-1">{{ $vendor->active === 1 ? 'إلغاء تفعيل' : 'تفعيل'}} </a>
-
+                                                                <a href="{{route('admin.branches.delete',$branch->id)}}"
+                                                                   class="btn btn-outline-danger box-shadow-3 mr-1 mb-1 btn-sm"><i class="ft-trash-2"></i></a>
 
                                                             </div>
                                                         </td>
                                                     </tr>
                                                 @endforeach
                                             @endisset
-
-
                                             </tbody>
                                         </table>
+                                        
                                         <div class="justify-content-center d-flex">
 
                                         </div>
