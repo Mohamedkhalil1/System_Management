@@ -10,7 +10,7 @@ class Invoice extends Model
     
 
     public function scopeSelection($query){
-        return $query->select('id','date','price','type ','client_id','supplier_id','created_at');
+        return $query->select('id','date','price','type ','client_id','supplier_id','admin_id','employee_id','created_at');
     }
     
     public function scopeClient($query){
