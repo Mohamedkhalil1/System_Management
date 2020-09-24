@@ -4,20 +4,23 @@
     <div class="app-content content">
         <div class="content-wrapper">
             <div class="content-header row">
-                <div class="content-header-left col-md-6 col-12 mb-2">
-                    <h3 class="content-header-title"> الاقسام الرئيسية </h3>
+                <div class="content-header-left col-md-6 col-12 mb-1">
+                    <h3 class="content-header-title"> المنتجات </h3>
                     <div class="row breadcrumbs-top">
                         <div class="breadcrumb-wrapper col-12">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">الرئيسية</a>
                                 </li>
-                                <li class="breadcrumb-item active"> الاقسام الرئيسية
+                                <li class="breadcrumb-item active"> المنتاجات
                                 </li>
                             </ol>
                         </div>
                     </div>
                 </div>
             </div>
+            <div class="heading-elements mb-2">
+                <a href="{{route('admin.products.create')}}" class="btn btn-success btn-sm"><i class="ft-plus white"></i> اضافه منتج جديد</a>
+              </div>
             <div class="content-body">
                 <!-- DOM - jQuery events table -->
                 <section id="dom">
@@ -25,7 +28,7 @@
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title">جميع الاقسام الرئيسية </h4>
+                                    <h4 class="card-title">جميع المنتجات </h4>
                                     <a class="heading-elements-toggle"><i
                                             class="la la-ellipsis-v font-medium-3"></i></a>
                                     <div class="heading-elements">
@@ -42,51 +45,46 @@
                                 @include('admin.includes.alerts.errors')
 
                                 <div class="card-content collapse show">
-                                    <div class="card-body card-dashboard">
+                                    <div class="card-body card-dashboard table-responsive">
                                         <table
-                                            class="table display nowrap table-striped table-bordered scroll-horizontal">
+                                            class="table table-de mb-0 display nowrap table-striped table-bordered">
                                             <thead class="">
                                             <tr>
-                                                <th>القسم </th>
-                                                <th> اللغة</th>
-                                                 <th>الحالة</th>
-                                                 <th>صوره القسم</th>
+                                                <th>الاسم</th>
+                                                <th>الوصف</th>
+                                                <th>السعر</th>
+                                                <th>الكميه المخزنه</th>
+                                                <th>الفرع</th>
                                                 <th>الإجراءات</th>
                                             </tr>
                                             </thead>
                                             <tbody>
 
-                                            @isset($categories)
-                                                @foreach($categories as $category)
+                                            @isset($products)
+                                                @foreach($products as $product)
                                                     <tr>
-                                                        <td>{{$category -> name}}</td>
-                                                        <td>{{get_default_lang()}}</td>
-                                                        <td>{{$category -> getActive()}}</td>
-                                                        <td> <img style="width: 150px; height: 100px;" src="{{$category->photo}}"></td>
+                                                        <td>{{$product->name}}</td>
+                                                        <td>{{$product->description}}</td>
+                                                        <td>{{$product->price}}</td>
+                                                        <td>{{$product->stock}}</td>
+                                                        <td>{{$product->branch ? $product->branch->name : ''}}</td>
                                                         <td>
                                                             <div class="btn-group" role="group"
                                                                  aria-label="Basic example">
-                                                                <a href="{{route('admin.maincategories.edit',$category -> id)}}"
-                                                                   class="btn btn-outline-primary btn-min-width box-shadow-3 mr-1 mb-1">تعديل</a>
+                                                                <a href="{{route('admin.products.edit',$product -> id)}}"
+                                                                   class="btn btn-outline-primary box-shadow-3 mr-1 mb-1 btn-sm"><i class="ft-edit"></i></a>
 
-
-                                                                <a href="{{route('admin.maincategories.destory',$category->id)}}"
-                                                                   class="btn btn-outline-danger btn-min-width box-shadow-3 mr-1 mb-1">حذف</a>
-
-                                                                
-                                                                <a href="{{route('admin.maincategories.status',$category->id)}}"
-                                                                   class="btn btn-outline-warning btn-min-width box-shadow-3 mr-1 mb-1">{{ $category->active === 1 ? 'إلغاء تفعيل' : 'تفعيل'}} </a>
-                                                              
+                                                                <a href="{{route('admin.products.delete',$product->id)}}"
+                                                                   class="btn btn-outline-danger box-shadow-3 mr-1 mb-1 btn-sm"><i class="ft-trash-2"></i></a>
 
                                                             </div>
                                                         </td>
                                                     </tr>
                                                 @endforeach
                                             @endisset
-
-
                                             </tbody>
                                         </table>
+                                        
                                         <div class="justify-content-center d-flex">
 
                                         </div>
