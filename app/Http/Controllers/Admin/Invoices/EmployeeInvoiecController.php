@@ -34,9 +34,12 @@ class EmployeeInvoiecController extends Controller
     {
         try{
             $params = $request->except('_token');
+            $employee = Employee::find($request->employee_id);
+            $params['branch_id'] = $employee->branch->id; 
             Invoice::create($params);
-            return redirect()->route('admin.employeesInvoice')->with(['success' => 'تم إضافه الموظف بنجاح']);
+            return redirect()->route('admin.employeesInvoice')->with(['success' => 'تم إضافه الفاتوره بنجاح']);
         }catch(\Exception $ex){
+            dd($ex);
             return redirect()->route('admin.employeesInvoice')->with(['error' => 'حدث مشكله جرب مره اخرى']);
         }
        
@@ -58,9 +61,12 @@ class EmployeeInvoiecController extends Controller
     {
         try{
             $params = $request->except('_token');
+            $employee = Employee::find($request->employee_id);
+            $params['brach_id'] = $employee->branch->id; 
             Invoice::employeeInvoices()->findOrFail($id)->update($params);
-            return redirect()->route('admin.employeesInvoice')->with(['success' => 'تم تحديث موظف بنجاح']);
+            return redirect()->route('admin.employeesInvoice')->with(['success' => 'تم تحديث فاتوره بنجاح']);
         }catch(\Exception $ex){
+           
             return redirect()->route('admin.employeesInvoice')->with(['error' => 'حدث مشكله جرب مره اخرى']);
         }
       
@@ -70,7 +76,7 @@ class EmployeeInvoiecController extends Controller
     {
         try{
             Invoice::employeeInvoices()->findOrFail($id)->delete();
-            return redirect()->route('admin.employeesInvoice')->with(['success' => 'تم حذف موظف بنجاح']);
+            return redirect()->route('admin.employeesInvoice')->with(['success' => 'تم حذف فاتوره بنجاح']);
         }
         catch(\Exception $ex){
             return redirect()->route('admin.employeesInvoice')->with(['error' => 'حدث مشكله جرب مره اخرى']);

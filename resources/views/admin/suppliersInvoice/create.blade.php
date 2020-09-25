@@ -13,7 +13,7 @@
                                 </li>
                                 <li class="breadcrumb-item"><a href="{{route('admin.suppliersInvoice')}}"> الفواتير </a>
                                 </li>
-                                <li class="breadcrumb-item active">تحديث فاتوره
+                                <li class="breadcrumb-item active">إضافة فاتوره جديد 
                                 </li>
                             </ol>
                         </div>
@@ -27,7 +27,7 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title" id="basic-layout-form"> تحديث فاتوره </h4>
+                                    <h4 class="card-title" id="basic-layout-form"> إضافة فاتوره  جديد </h4>
                                     <a class="heading-elements-toggle"><i
                                             class="la la-ellipsis-v font-medium-3"></i></a>
                                     <div class="heading-elements">
@@ -43,16 +43,15 @@
                                 @include('admin.includes.alerts.errors')
                                 <div class="card-content collapse show">
                                     <div class="card-body">
-                                        <form class="form" action="{{route('admin.employeesInvoice.update',$invoice->id)}}" method="POST">
+                                        <form class="form" action="{{route('admin.suppliersInvoice.store')}}" method="POST">
                                             @csrf
-                                            @method('put')
                                             <div class="form-body">
                                                 <h4 class="form-section"><i class="ft-home"></i> بيانات الفاتوره </h4>
                                                 <div class="row">
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label for="projectinput1"> تاريخ الفاتوره </label>
-                                                            <input type="datetime-local" value="{{$invoice->date}}" id="date"
+                                                            <input type="datetime-local" value="{{old('date')}}" id="date"
                                                                     class="form-control"
                                                                     placeholder=""
                                                                     name="date">
@@ -64,18 +63,18 @@
 
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label for="projectinput2"> أختر الموظف </label>
-                                                            <select name="employee_id" class=" form-control">
-                                                                <optgroup label="من فضلك أختر الموظف ">
-                                                                    @if($employees && $employees-> count() > 0)
-                                                                        @foreach($employees as $employee)
+                                                            <label for="projectinput2"> أختر المزود </label>
+                                                            <select name="supplier_id" class=" form-control">
+                                                                <optgroup label="من فضلك أختر المزود ">
+                                                                    @if($suppliers && $suppliers-> count() > 0)
+                                                                        @foreach($suppliers as $supplier)
                                                                             <option
-                                                                                value="{{$employee->id}}" @if(isset($invoice->employee) && $invoice->employee->id === $employee->id ) selected @endif>{{$employee->name}}</option>
+                                                                                value="{{$supplier->id}}">{{$supplier->name}}</option>
                                                                         @endforeach
                                                                     @endif
                                                                 </optgroup>
                                                             </select>
-                                                            @error('employee_id')
+                                                            @error('supplier_id')
                                                             <span class="text-danger"> {{$message}}</span>
                                                             @enderror
                                                         </div>
@@ -88,7 +87,7 @@
                                                               <span class="input-group-text">.00</span>
                                                             </div>
                                                             
-                                                            <input type="number" value="{{$invoice->price}}" class="form-control square" placeholder="السعر" aria-label="Amount (to the nearest EGP)" name="price">
+                                                            <input type="number" value="{{old('price')}}" class="form-control square" placeholder="السعر" aria-label="Amount (to the nearest EGP)" name="price">
                                                             <div class="input-group-append">
                                                               <span class="input-group-text">جينه</span>
                                                             </div>
@@ -102,7 +101,7 @@
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label for="projectinput1">نوع الفاتوره</label>
-                                                            <input type="text" value="{{$invoice->type}}" id="date"
+                                                            <input type="text" value="{{old('type')}}" id="date"
                                                                     class="form-control"
                                                                     placeholder="نوع الفاتوره او سبب الفاتوره"
                                                                     name="type">
@@ -115,14 +114,13 @@
                                             </div>
 
 
-
                                             <div class="form-actions">
                                                 <button type="button" class="btn btn-warning mr-1"
                                                         onclick="history.back();">
                                                     <i class="ft-x"></i> تراجع
                                                 </button>
                                                 <button type="submit" class="btn btn-primary">
-                                                    <i class="la la-check-square-o"></i> تحديث
+                                                    <i class="la la-check-square-o"></i> حفظ
                                                 </button>
                                             </div>
                                         </form>

@@ -43,7 +43,7 @@
                                 @include('admin.includes.alerts.errors')
                                 <div class="card-content collapse show">
                                     <div class="card-body">
-                                        <form class="form" action="{{route('admin.employeesInvoice.update',$invoice->id)}}" method="POST">
+                                        <form class="form" action="{{route('admin.suppliersInvoice.update',$invoice->id)}}" method="POST">
                                             @csrf
                                             @method('put')
                                             <div class="form-body">
@@ -65,17 +65,17 @@
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label for="projectinput2"> أختر الموظف </label>
-                                                            <select name="employee_id" class=" form-control">
-                                                                <optgroup label="من فضلك أختر الموظف ">
-                                                                    @if($employees && $employees-> count() > 0)
-                                                                        @foreach($employees as $employee)
+                                                            <select name="supplier_id" class=" form-control">
+                                                                <optgroup label="من فضلك أختر العميل ">
+                                                                    @if($suppliers && $suppliers-> count() > 0)
+                                                                        @foreach($suppliers as $supplier)
                                                                             <option
-                                                                                value="{{$employee->id}}" @if(isset($invoice->employee) && $invoice->employee->id === $employee->id ) selected @endif>{{$employee->name}}</option>
+                                                                                value="{{$supplier->id}}" @if(isset($invoice->supplier) && $invoice->supplier->id === $supplier->id ) selected @endif>{{$supplier->name}}</option>
                                                                         @endforeach
                                                                     @endif
                                                                 </optgroup>
                                                             </select>
-                                                            @error('employee_id')
+                                                            @error('supplier_id')
                                                             <span class="text-danger"> {{$message}}</span>
                                                             @enderror
                                                         </div>

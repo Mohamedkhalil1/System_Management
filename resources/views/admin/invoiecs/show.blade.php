@@ -87,7 +87,7 @@
                       
                         @foreach ($details as $index => $detail)
                             <tr>
-                                <th scope="row">{{$index}}</th>
+                                <th scope="row">{{$index+1}}</th>
                                 <td>
                                 <p>{{App\Models\Product::find($detail->product_id)->name}}</p>
                                 </td>
@@ -101,7 +101,7 @@
                 </div>
               </div>
             </div>
-       
+            {{ $details->links() }}
           </div>
         </section>
       </div>

@@ -51,8 +51,11 @@ class BranchController extends Controller
             if($branch === null){
                 return redirect()->route('admin.branches')->with(['error' => ' هذا الفرع غير موجود']);
             }
-            $products = $branch->products;
-            return view('admin.branches.show',compact('branch','products'));
+            $products = $branch->products()->paginate(PAGINATION_COUNT);
+            $invoices = $branch->invoices()->clientInvoices()->paginate(PAGINATION_COUNT);
+            $employeeInvoices = $branch->invoices()->employeeInvoices()->paginate(PAGINATION_COUNT);
+            $employees = $branch->employees()->paginate(PAGINATION_COUNT);
+            return view('admin.branches.show',compact('branch','products','invoices','employeeInvoices','employees'));
         }catch(\Exception $ex){
             return redirect()->route('admin.branches')->with(['error' => 'حدث مشكله جرب مره اخرى']);
         }

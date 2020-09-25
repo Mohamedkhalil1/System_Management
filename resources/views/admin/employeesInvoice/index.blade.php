@@ -19,7 +19,7 @@
                 </div>
             </div>
             <div class="heading-elements mb-2">
-                <a href="{{route('admin.invoices.create')}}" class="btn btn-success btn-sm"><i class="ft-plus white"></i> اضافه فاتوره جديد</a>
+                <a href="{{route('admin.employeesInvoice.create')}}" class="btn btn-success btn-sm"><i class="ft-plus white"></i> اضافه فاتوره جديد</a>
               </div>
             <div class="content-body">
                 <!-- DOM - jQuery events table -->
@@ -28,7 +28,7 @@
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title">جميع الفواتير </h4>
+                                    <h4 class="card-title"><span class="la la-clipboard"></span> جميع الفواتير <span class="badge badge-default badge-success">{{App\Models\Invoice::employeeInvoices()->count()}}</span></h4>
                                     <a class="heading-elements-toggle"><i
                                             class="la la-ellipsis-v font-medium-3"></i></a>
                                     <div class="heading-elements">

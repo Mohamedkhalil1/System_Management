@@ -14,7 +14,7 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 |
 */
 
-#define('PAGINATION_COUNT',10);
+define('PAGINATION_COUNT',10);
 Route::group(
     [
         'prefix' => LaravelLocalization::setLocale(),
@@ -128,6 +128,18 @@ Route::group(
                 Route::get('delete/{id}','EmployeeInvoiecController@destroy')->name('admin.employeesInvoice.delete');
             });
             ## end Invoice Employees Routes 
+
+
+                  ## Invoice Suppliers Routes 
+                  Route::group(['namespace' =>'Invoices','prefix' => 'suppliersInvoice'], function () {
+                    Route::get('/','SupplierInvoiecController@index')->name('admin.suppliersInvoice');
+                    Route::get('/create','SupplierInvoiecController@create')->name('admin.suppliersInvoice.create');
+                    Route::post('/','SupplierInvoiecController@store')->name('admin.suppliersInvoice.store');
+                    Route::get('/edit/{id}','SupplierInvoiecController@edit')->name('admin.suppliersInvoice.edit');
+                    Route::put('/{id}','SupplierInvoiecController@update')->name('admin.suppliersInvoice.update');
+                    Route::get('delete/{id}','SupplierInvoiecController@destroy')->name('admin.suppliersInvoice.delete');
+                });
+                ## end Invoice Suppliers Routes 
 
             
             

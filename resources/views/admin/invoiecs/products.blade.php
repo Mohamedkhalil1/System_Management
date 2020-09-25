@@ -24,7 +24,9 @@
                                         <div class="card-body">
                                         <div class="form-group">
                                             <h5>{{$product->name}}@if($invoice->products()->find($product->id) !== null) <i class="ft-check-circle float-right" style="color:green"></i>@endif</h5>
-                                            <p>{{$product->price}} جينه</p>
+                                            <p>{{$product->price}} جينه
+                                             <span class="float-right">الكميه : {{(int)$product->stock === 0 ? 'غير متاح' : $product->stock}} </span>
+                                        </p>
                                             <div class="form-group">
                                                 <form method="POST" action="{{route('admin.invoices.addProduct',$invoice->id)}}">
                                                     @csrf
@@ -49,11 +51,11 @@
                                     </div>
                                     </div>
                                 </div>
-                             
                             @endforeach
                         @endisset
                     </div>
                   </section>
+                  {{ $products->links() }}
                 <a href="{{route('admin.invoices.finish',$invoice->id)}}" class="btn btn-primary float-right mb-2">
                     <i class="la la-check-square-o"></i> انهاء الفاتوره
                 </a>
