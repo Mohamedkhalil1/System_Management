@@ -11,7 +11,7 @@
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="/">الرئيسية </a>
                                 </li>
-                                <li class="breadcrumb-item"><a href="{{route('admin.invoices')}}"> الفواتير </a>
+                                <li class="breadcrumb-item"><a href="{{route('admin.suppliersInvoice')}}"> الفواتير </a>
                                 </li>
                                 <li class="breadcrumb-item active">إضافة فاتوره جديد 
                                 </li>
@@ -65,7 +65,7 @@
                                                         <div class="form-group">
                                                             <label for="projectinput2"> أختر الموظف </label>
                                                             <select name="employee_id" class=" form-control">
-                                                                <optgroup label="من فضلك أختر العميل ">
+                                                                <optgroup label="من فضلك أختر الموظف ">
                                                                     @if($employees && $employees-> count() > 0)
                                                                         @foreach($employees as $employee)
                                                                             <option

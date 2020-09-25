@@ -96,7 +96,7 @@
                                         <tr>
                                             <th>رقم الفاتوره</th>
                                             <th>تاريخ الفاتوره</th>
-                                            <th>العميل</th>
+                                            <th>السبب</th>
                                             <th>الإجراءات</th>
                                         </tr>
                                         </thead>
@@ -105,17 +105,17 @@
                                         @isset($invoices)
                                             @foreach($invoices as $invoice)
                                                 <tr>
-                                                    <td>{{$invoice->name}}</td>
-                                                    <td>{{$invoice->description}}</td>
-                                                    <td>{{$invoice->price}}</td>
-                                                    <td>{{$invoice->stock}}</td>
+                                                    <td>{{$invoice->id}}</td>
+                                                    <td>{{$invoice->date}}</td>
+                                                    <td>{{$invoice->type}}</td>
+                                                    
                                                     <td>
                                                         <div class="btn-group" role="group"
                                                                 aria-label="Basic example">
-                                                            <a href="{{route('admin.products.edit',$invoice -> id)}}"
+                                                            <a href="{{route('admin.employeesInvoice.edit',$invoice -> id)}}"
                                                                 class="btn btn-outline-primary box-shadow-3 mr-1 mb-1 btn-sm"><i class="ft-edit"></i></a>
 
-                                                            <a href="{{route('admin.products.delete',$invoice->id)}}"
+                                                            <a href="{{route('admin.employeesInvoice.delete',$invoice->id)}}"
                                                                 class="btn btn-outline-danger box-shadow-3 mr-1 mb-1 btn-sm"><i class="ft-trash-2"></i></a>
 
                                                         </div>

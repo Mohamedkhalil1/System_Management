@@ -52,7 +52,19 @@
                 </div>
                 <!-- project-info -->
                 <div id="project-info" class="card-body row">
-                  <div class="project-info-count col-lg-4 col-md-12">
+                  <div class="project-info-count col-lg-3 col-md-6">
+                    <div class="project-info-icon">
+                      <h2>{{$branch->products()->count()}}</h2>
+                      <div class="project-info-sub-icon">
+                        <span class="icon-grid"></span>
+                      </div>
+                    </div>
+                    <div class="project-info-text pt-1">
+                      <h5>عدد المنتاجات</h5>
+                    </div>
+                  </div>
+
+                  <div class="project-info-count col-lg-3 col-md-6">
                     <div class="project-info-icon">
                       <h2>{{$branch->employees()->count()}}</h2>
                       <div class="project-info-sub-icon">
@@ -63,9 +75,9 @@
                       <h5>عدد الموظفين</h5>
                     </div>
                   </div>
-                  <div class="project-info-count col-lg-4 col-md-12">
+                  <div class="project-info-count col-lg-3 col-md-6">
                     <div class="project-info-icon">
-                      <h2>{{$branch->employees()->count()}}</h2>
+                      <h2>{{$branch->invoices->count()}}</h2>
                       <div class="project-info-sub-icon">
                         <span class="la la-clipboard"></span>
                       </div>
@@ -74,9 +86,9 @@
                       <h5>عدد الفواتير</h5>
                     </div>
                   </div>
-                  <div class="project-info-count col-lg-4 col-md-12">
+                  <div class="project-info-count col-lg-3 col-md-6">
                     <div class="project-info-icon">
-                      <h2>{{$branch->invoices->count()}}</h2>
+                      <h2>{{$branch->invoices()->clientInvoices()->count()}}</h2>
                       <div class="project-info-sub-icon">
                         <span class="la la-money"></span>
                       </div>
@@ -97,7 +109,7 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title"> منتجات الفرع </h4>
+                                <h4 class="card-title"> <span class="icon-grid"></span> منتجات الفرع </h4>
                                 <a class="heading-elements-toggle"><i
                                         class="la la-ellipsis-v font-medium-3"></i></a>
                                 <div class="heading-elements">
@@ -150,7 +162,7 @@
                                     </table>
                                     
                                     <div class="justify-content-center d-flex">
-
+                                      @isset($products) {{ $products->links() }} @endisset
                                     </div>
                                 </div>
                             </div>
@@ -158,13 +170,80 @@
                     </div>
                 </div>
             </section>
-
+            
+            <section id="dom" class="mt-3">
+              <div class="row">
+                  <div class="col-12">
+                      <div class="card">
+                          <div class="card-header">
+                              <h4 class="card-title"><span class="la la-users"></span> الموظفين بالفرع </h4>
+                              <a class="heading-elements-toggle"><i
+                                      class="la la-ellipsis-v font-medium-3"></i></a>
+                              <div class="heading-elements">
+                                  <ul class="list-inline mb-0">
+                                      <li><a data-action="collapse"><i class="ft-minus"></i></a></li>
+                                      <li><a data-action="reload"><i class="ft-rotate-cw"></i></a></li>
+                                      <li><a data-action="expand"><i class="ft-maximize"></i></a></li>
+                                      <li><a data-action="close"><i class="ft-x"></i></a></li>
+                                  </ul>
+                              </div>
+                          </div>
+  
+                          <div class="card-content collapse show">
+                              <div class="card-body card-dashboard table-responsive">
+                                  <table
+                                      class="table table-de mb-0 display nowrap table-striped table-bordered">
+                                      <thead class="">
+                                      <tr>
+                                          <th>الاسم</th>
+                                          <th>العنوان</th>
+                                          <th>البريد الالكتروني</th>
+                                          <th>رقم التليفون</th>
+                                          <th>الإجراءات</th>
+                                      </tr>
+                                      </thead>
+                                      <tbody>
+  
+                                      @isset($employees)
+                                          @foreach($employees as $employee)
+                                              <tr>
+                                                  <td><a href="{{route('admin.employees.show',$employee->id)}}">{{$employee->name}}</a></td>
+                                                  <td>{{$employee->address}}</td>
+                                                  <td>{{$employee->email}}</td>
+                                                  <td>{{$employee->phone }}</td>
+                                                  <td>
+                                                      <div class="btn-group" role="group"
+                                                              aria-label="Basic example">
+                                                          <a href="{{route('admin.employees.edit',$employee -> id)}}"
+                                                              class="btn btn-outline-primary box-shadow-3 mr-1 mb-1 btn-sm"><i class="ft-edit"></i></a>
+  
+                                                          <a href="{{route('admin.employees.delete',$employee->id)}}"
+                                                              class="btn btn-outline-danger box-shadow-3 mr-1 mb-1 btn-sm"><i class="ft-trash-2"></i></a>
+  
+                                                      </div>
+                                                  </td>
+                                              </tr>
+                                          @endforeach
+                                      @endisset
+                                      </tbody>
+                                  </table>
+                                  
+                                  <div class="justify-content-center d-flex">
+                                    {{$employees->links()}}
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </section>
+          
             <section id="dom" class="mt-3">
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title"> فواتير الفرع </h4>
+                                <h4 class="card-title"><span class="la la-clipboard"></span> فواتير الفرع  </h4>
                                 <a class="heading-elements-toggle"><i
                                         class="la la-ellipsis-v font-medium-3"></i></a>
                                 <div class="heading-elements">
@@ -185,6 +264,7 @@
                                         <tr>
                                             <th>رقم الفاتوره</th>
                                             <th>تاريخ الفاتوره</th>
+                                            <th>السعر</th>
                                             <th>العميل</th>
                                             <th>الإجراءات</th>
                                         </tr>
@@ -192,19 +272,19 @@
                                         <tbody>
 
                                         @isset($invoices)
-                                            @foreach($products as $product)
+                                            @foreach($invoices as $invoice)
                                                 <tr>
-                                                    <td>{{$product->name}}</td>
-                                                    <td>{{$product->description}}</td>
-                                                    <td>{{$product->price}}</td>
-                                                    <td>{{$product->stock}}</td>
+                                                    <td><a href="{{route('admin.invoices.show',$invoice->id)}}">{{$invoice->id}}</a></td>
+                                                    <td>{{$invoice->date}}</td>
+                                                    <td>{{$invoice->price}}</td>
+                                                    <td>{{$invoice->client ? $invoice->client->name : ''}}</td>
                                                     <td>
                                                         <div class="btn-group" role="group"
                                                                 aria-label="Basic example">
-                                                            <a href="{{route('admin.products.edit',$product -> id)}}"
+                                                            <a href="{{route('admin.invoices.edit',$invoice -> id)}}"
                                                                 class="btn btn-outline-primary box-shadow-3 mr-1 mb-1 btn-sm"><i class="ft-edit"></i></a>
 
-                                                            <a href="{{route('admin.products.delete',$product->id)}}"
+                                                            <a href="{{route('admin.invoices.delete',$invoice->id)}}"
                                                                 class="btn btn-outline-danger box-shadow-3 mr-1 mb-1 btn-sm"><i class="ft-trash-2"></i></a>
 
                                                         </div>
@@ -216,7 +296,7 @@
                                     </table>
                                     
                                     <div class="justify-content-center d-flex">
-
+                                      {{$invoices->links()}}
                                     </div>
                                 </div>
                             </div>
@@ -224,6 +304,77 @@
                     </div>
                 </div>
             </section>
+
+            <section id="dom" class="mt-3">
+              <div class="row">
+                  <div class="col-12">
+                      <div class="card">
+                          <div class="card-header">
+                              <h4 class="card-title"><span class="la la-money"></span> فواتير الموظفين بالفرع </h4>
+                              <a class="heading-elements-toggle"><i
+                                      class="la la-ellipsis-v font-medium-3"></i></a>
+                              <div class="heading-elements">
+                                  <ul class="list-inline mb-0">
+                                      <li><a data-action="collapse"><i class="ft-minus"></i></a></li>
+                                      <li><a data-action="reload"><i class="ft-rotate-cw"></i></a></li>
+                                      <li><a data-action="expand"><i class="ft-maximize"></i></a></li>
+                                      <li><a data-action="close"><i class="ft-x"></i></a></li>
+                                  </ul>
+                              </div>
+                          </div>
+
+                          <div class="card-content collapse show">
+                              <div class="card-body card-dashboard table-responsive">
+                                  <table
+                                      class="table table-de mb-0 display nowrap table-striped table-bordered">
+                                      <thead class="">
+                                      <tr>
+                                          <th>رقم الفاتوره</th>
+                                          <th>تاريخ الفاتوره</th>
+                                          <th>السعر</th>
+                                          <th>الموظف</th>
+                                          <th>السبب</th>
+                                          <th>الإجراءات</th>
+                                      </tr>
+                                      </thead>
+                                      <tbody>
+
+                                      @isset($employeeInvoices)
+                                          @foreach($employeeInvoices as $invoice)
+                                              <tr>
+                                                  <td>{{$invoice->id}}</a></td>
+                                                  <td>{{$invoice->date}}</td>
+                                                  <td>{{$invoice->price}}</td>
+                                                  <td>{{$invoice->employee ? $invoice->employee->name : ''}}</td>
+                                                  <td>{{$invoice->type}}</td>
+                                                  <td>
+                                                      <div class="btn-group" role="group"
+                                                              aria-label="Basic example">
+                                                          <a href="{{route('admin.employeesInvoice.edit',$invoice -> id)}}"
+                                                              class="btn btn-outline-primary box-shadow-3 mr-1 mb-1 btn-sm"><i class="ft-edit"></i></a>
+
+                                                          <a href="{{route('admin.employeesInvoice.delete',$invoice->id)}}"
+                                                              class="btn btn-outline-danger box-shadow-3 mr-1 mb-1 btn-sm"><i class="ft-trash-2"></i></a>
+
+                                                      </div>
+                                                  </td>
+                                              </tr>
+                                          @endforeach
+                                      @endisset
+                                      </tbody>
+                                  </table>
+                                  
+                                  <div class="justify-content-center d-flex">
+                                    {{$employeeInvoices->links()}}
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </section>
+
+         
 
         </div>
       </div>

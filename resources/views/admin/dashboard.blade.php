@@ -19,7 +19,7 @@
                                         <h3 class="text-muted">اجمالي المبيعات</h3>
                                     </div>
                                     <div class="col-12 text-right">
-                                        <h4>$9,980</h4>
+                                        <h4>{{number_format(App\Models\Invoice::clientInvoices()->sum('price'),1)}} <span style="color:green">$</span></h4>
                                     </div>
                                 </div>
                             </div>
@@ -40,7 +40,7 @@
                                         <h3 class="text-muted">اجمالي المخرجات</h3>
                                     </div>
                                     <div class="col-12 text-right">
-                                        <h4>944</h4>
+                                        <h4>{{number_format(App\Models\Invoice::supplierInvoices()->sum('price') + App\Models\Invoice::employeeInvoices()->sum('price'),1)}} <span style="color:green">$</span></h4>
                                       
                                     </div>
                                 </div>
@@ -63,7 +63,7 @@
                                         <h4 class="text-muted">عدد المنتجات</h4>
                                     </div>
                                     <div class="col-12 text-right">
-                                        <h4>500</h4>
+                                        <h4>{{number_format(App\Models\Product::count(),1)}}  <i class="la la-tags" style="color:blue"></i></h4>
                                     </div>
                                 </div>
                             </div>
