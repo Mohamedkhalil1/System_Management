@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-
+@section('title',"|تعديل عميل $client->name")
 @section('content')
 
     <div class="app-content content">

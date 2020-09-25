@@ -1,7 +1,7 @@
 @extends('layouts.login')
 @section('title','الدخول')
 @section('content')
-<link rel="apple-touch-icon" href="{{asset('assets/front/images/logo/logo.png')}}">
+<link rel="apple-touch-icon" href="https://gfx4arab.com/wp-content/uploads/2018/12/blue-company-logo_1057-513.jpg">
 <body class="vertical-layout vertical-menu 1-column  bg-full-screen-image menu-expanded blank-page blank-page"
 data-open="click" data-menu="vertical-menu" data-col="1-column">
   <div class="app-content content">
@@ -15,7 +15,7 @@ data-open="click" data-menu="vertical-menu" data-col="1-column">
               <div class="card border-grey border-lighten-3 px-1 py-1 m-0">
                 <div class="card-header border-0 pb-0">
                   <div class="card-title text-center">
-                    <img src="{{asset('assets/front/images/logo/logo.png')}}" alt="لوجو الشركه">
+                    <img src="https://gfx4arab.com/wp-content/uploads/2018/12/blue-company-logo_1057-513.jpg" height="200px" weight="200px" alt="لوجو الشركه">
                   </div>
                 </div>
                 <div class="card-content mt-2">
@@ -28,7 +28,7 @@ data-open="click" data-menu="vertical-menu" data-col="1-column">
                     <form class="form-horizontal" action="{{route('admin.login')}}" method="post" novalidate>
                       @csrf
                       <fieldset class="form-group position-relative has-icon-left">
-                        <input type="email" name="email" class="form-control" id="user-email" placeholder="البريد الالكتروني"
+                        <input type="text" name="email" class="form-control" id="user-email" placeholder="البريد الالكتروني"
                         >
                         <div class="form-control-position">
                           <i class="ft-mail"></i>

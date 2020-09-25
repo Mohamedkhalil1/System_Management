@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-
+@section('title',"فواتير العملاء")
 @section('content')
     <div class="app-content content">
         <div class="content-wrapper">
@@ -91,8 +91,8 @@
                                             </tbody>
                                         </table>
                                         
-                                        <div class="justify-content-center d-flex">
-
+                                        <div class="justify-content-center d-flex mt-1">
+                                            {{ $invoices->links() }}
                                         </div>
                                     </div>
                                 </div>
@@ -100,7 +100,7 @@
                         </div>
                     </div>
                 </section>
-                {{ $invoices->links() }}
+               
             </div>
         </div>
     </div>
