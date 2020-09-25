@@ -40,10 +40,12 @@
               class="badge badge badge-dark badge-pill float-right mr-2">{{App\Models\Invoice::count()}}</span>
           </a>
               <ul class="menu-content">
-                  <li class="active"><a class="menu-item" href=""
-                                        data-i18n="nav.dash.ecommerce">فواتير الشركه</a>
+                  <li class="active"><a class="menu-item" href="{{route('admin.invoices')}}"
+                                        data-i18n="nav.dash.ecommerce">فواتير البيع</a>
                   </li>
                   <li class="active"><a class="menu-item" href="" data-i18n="nav.dash.crypto">قواتير المزودين </a>
+                  </li>
+                  <li class="active"><a class="menu-item" href="{{route('admin.employeesInvoice')}}" data-i18n="nav.dash.crypto">فواتتير الموظفين </a>
                   </li>
               </ul>
           </li>

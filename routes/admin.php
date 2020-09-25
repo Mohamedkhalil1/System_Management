@@ -14,7 +14,7 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 |
 */
 
-define('PAGINATION_COUNT',10);
+#define('PAGINATION_COUNT',10);
 Route::group(
     [
         'prefix' => LaravelLocalization::setLocale(),
@@ -98,6 +98,39 @@ Route::group(
             });
             ## end Employees Routes 
 
+            ## Invoices Routes 
+            Route::group(['namespace' =>'Invoices','prefix' => 'invoices'], function () {
+                Route::get('/','InvoiecController@index')->name('admin.invoices');
+
+                Route::get('/create','InvoiecController@create')->name('admin.invoices.create');
+                Route::post('/','InvoiecController@store')->name('admin.invoices.store');
+                Route::get('/show/{id}','InvoiecController@show')->name('admin.invoices.show');
+                Route::get('/edit/{id}','InvoiecController@edit')->name('admin.invoices.edit');
+                Route::put('/{id}','InvoiecController@update')->name('admin.invoices.update');
+                Route::put('/{id}','InvoiecController@update')->name('admin.invoices.update');
+                Route::get('delete/{id}','InvoiecController@destroy')->name('admin.invoices.delete');
+
+
+                Route::get('/show_product/{id}','InvoiecController@showProduct')->name('admin.invoices.showProduct');
+                Route::post('/add_product/{id}','InvoiecController@addProduct')->name('admin.invoices.addProduct');
+                Route::get('/remove_product/{id}/{product_id}','InvoiecController@removeProduct')->name('admin.invoices.removeProduct');
+                Route::get('/finish_invoice/{id}','InvoiecController@finish')->name('admin.invoices.finish');
+            });
+            ## end Invoices Routes 
+
+             ## Invoice Employees Routes 
+             Route::group(['namespace' =>'Invoices','prefix' => 'employeesInvoice'], function () {
+                Route::get('/','EmployeeInvoiecController@index')->name('admin.employeesInvoice');
+                Route::get('/create','EmployeeInvoiecController@create')->name('admin.employeesInvoice.create');
+                Route::post('/','EmployeeInvoiecController@store')->name('admin.employeesInvoice.store');
+                Route::get('/edit/{id}','EmployeeInvoiecController@edit')->name('admin.employeesInvoice.edit');
+                Route::put('/{id}','EmployeeInvoiecController@update')->name('admin.employeesInvoice.update');
+                Route::get('delete/{id}','EmployeeInvoiecController@destroy')->name('admin.employeesInvoice.delete');
+            });
+            ## end Invoice Employees Routes 
+
+            
+            
         });
         
 });

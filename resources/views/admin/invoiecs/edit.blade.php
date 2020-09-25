@@ -11,9 +11,9 @@
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="/">الرئيسية </a>
                                 </li>
-                                <li class="breadcrumb-item"><a href="{{route('admin.products')}}"> المنتاجات </a>
+                                <li class="breadcrumb-item"><a href="{{route('admin.invoices')}}"> الفواتير </a>
                                 </li>
-                                <li class="breadcrumb-item active">تحديث المنتج 
+                                <li class="breadcrumb-item active">تحديث فاتوره
                                 </li>
                             </ol>
                         </div>
@@ -27,7 +27,7 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title" id="basic-layout-form"> تحديث المنتج   </h4>
+                                    <h4 class="card-title" id="basic-layout-form"> تحديث فاتوره </h4>
                                     <a class="heading-elements-toggle"><i
                                             class="la la-ellipsis-v font-medium-3"></i></a>
                                     <div class="heading-elements">
@@ -43,21 +43,20 @@
                                 @include('admin.includes.alerts.errors')
                                 <div class="card-content collapse show">
                                     <div class="card-body">
-                                        <form class="form" action="{{route('admin.products.update',$product->id)}}" method="POST">
+                                        <form class="form" action="{{route('admin.invoices.update',$invoice->id)}}" method="POST">
                                             @csrf
                                             @method('put')
-                                            
                                             <div class="form-body">
-                                                <h4 class="form-section"><i class="ft-home"></i> بيانات المنتج </h4>
+                                                <h4 class="form-section"><i class="ft-home"></i> بيانات الفاتوره </h4>
                                                 <div class="row">
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label for="projectinput1"> اسم المنتج </label>
-                                                            <input type="text" value="{{$product->name}}" id="name"
+                                                            <label for="projectinput1"> تاريخ الفاتوره </label>
+                                                            <input type="datetime-local" value="{{$invoice->date}}" id="date"
                                                                     class="form-control"
-                                                                    placeholder="اسم المنتج"
-                                                                    name="name">
-                                                            @error("name")
+                                                                    placeholder=""
+                                                                    name="date">
+                                                            @error("date")
                                                             <span class="text-danger"> {{ $message }} </span>
                                                             @enderror
                                                         </div>
@@ -65,13 +64,32 @@
 
                                                     <div class="col-md-6">
                                                         <div class="form-group">
+                                                            <label for="projectinput2"> أختر العميل </label>
+                                                            <select name="client_id" class=" form-control">
+                                                                <optgroup label="من فضلك أختر العميل ">
+                                                                    @if($clients && $clients-> count() > 0)
+                                                                        @foreach($clients as $client)
+                                                                            <option
+                                                                                value="{{$client->id}}" @if(isset($invoice->client) && $invoice->client->id === $client->id ) selected @endif>{{$client->name}}</option>
+                                                                        @endforeach
+                                                                    @endif
+                                                                </optgroup>
+                                                            </select>
+                                                            @error('client_id')
+                                                            <span class="text-danger"> {{$message}}</span>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-12">
+                                                        <div class="form-group">
                                                             <label for="projectinput2"> أختر الفرع </label>
                                                             <select name="branch_id" class=" form-control">
-                                                                <optgroup label="من فضلك أختر الفرع ">
+                                                                <optgroup label="من فضلك الفرع  ">
                                                                     @if($branches && $branches-> count() > 0)
                                                                         @foreach($branches as $branch)
                                                                             <option
-                                                                                value="{{$branch->id}}" @if(isset($product->branch) && $product->branch->id === $branch->id ) selected @endif>{{$branch->name}}></option>
+                                                                                value="{{$branch->id}}" @if(isset($invoice->branch) && $invoice->branch->id === $branch->id ) selected @endif >{{$branch->name}}</option>
                                                                         @endforeach
                                                                     @endif
                                                                 </optgroup>
@@ -82,51 +100,9 @@
                                                         </div>
                                                     </div>
 
-                                                    <div class="col-md-6">
-                                                        <label for="projectinput1"> السعر </label>
-                                                        <div class="input-group">
-                                                            <div class="input-group-prepend">
-                                                              <span class="input-group-text">.00</span>
-                                                            </div>
-                                                            
-                                                            <input type="number" value={{$product->price}} class="form-control square" placeholder="السعر" aria-label="Amount (to the nearest EGP)" name="price">
-                                                            <div class="input-group-append">
-                                                              <span class="input-group-text">جينه</span>
-                                                            </div>
-                                                           
-                                                        </div>
-                                                        @error("price")
-                                                        <span class="text-danger"> {{ $message }} </span>
-                                                        @enderror
-                                                    </div>
-
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label for="projectinput1"> الكميه </label>
-                                                            <input type="number"
-                                                                    class="form-control"
-                                                                    placeholder="كميه المنتج"
-                                                                    value="{{$product->stock}}"
-                                                                    name="stock">
-
-                                                            @error("stock")
-                                                            <span class="text-danger"> {{ $message }} </span>
-                                                            @enderror
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-md-12">
-                                                        <div class="form-group">
-                                                            <label for="complaintinput5">الوصف</label>
-                                                            <textarea id="complaintinput5" rows="5" class="form-control round" name="description" placeholder="وصف المنتج">{{$product->description}}</textarea>
-                                                            @error("description")
-                                                            <span class="text-danger"> {{ $message }} </span>
-                                                            @enderror
-                                                        </div>
-                                                    </div>
-
                                                 </div>
                                             </div>
+
 
                                             <div class="form-actions">
                                                 <button type="button" class="btn btn-warning mr-1"

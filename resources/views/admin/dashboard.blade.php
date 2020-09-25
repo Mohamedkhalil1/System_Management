@@ -83,34 +83,61 @@
                 <div class="col-12 col-xl-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4 class="card-title">احدث الفواتير</h4>
+                            <h4 class="card-title"><a href="{{route('admin.invoices')}}">احدث الفواتير</a></h4>
                             <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
                             <div class="heading-elements">
                             </div>
                         </div>
-                        <div class="card-content">
-                            <div class="table-responsive">
-                                <table class="table table-de mb-0">
-                                    <thead>
+                        <div class="card-content collapse show">
+                            <div class="card-body card-dashboard table-responsive">
+                                <table
+                                    class="table table-de mb-0 display nowrap table-striped table-bordered">
+                                    <thead class="">
                                     <tr>
-                                        <th>رقم الطلب</th>
+                                        <th>الرقم</th>
+                                        <th>التاريخ</th>
+                                        <th>المبلغ</th>
                                         <th>العميل</th>
-                                        <th>السعر</th>
-                                        <th>حاله الطلب</th>
-                                        <th>الاجمالي</th>
+                                        <th>الفرع</th>
+                                        <td>الحاله</td>
+                                        <th>الإجراءات</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr class="bg-success bg-lighten-5">
-                                        <td>10500</td>
-                                        <td>محمد خليل</td>
-                                        <td>1500</td>
-                                        <td>مكتمل</td>
-                                        <td>5200</td>
-                                    </tr>
-                                   
+
+                                    @isset($invoices)
+                                        @foreach($invoices as $invoice)
+                                            <tr>
+                                                <td><a href="{{route('admin.invoices.show',$invoice->id)}}">{{$invoice->id}}</a></td>
+                                                <td>{{date($invoice->date)}}</td>
+                                                <td>{{$invoice->price}} ج</td>
+                                                
+                                                <td>{{$invoice->client ? $invoice->client->name : ''}}</td>
+                                                <td>{{$invoice->branch ? $invoice->branch->name : ''}}</td>
+                                                <td>{{$invoice->status ? 'تم الدفع' : 'قيد التنفيذ'}}</td>
+                                                <td>
+                                                    <div class="btn-group" role="group"
+                                                         aria-label="Basic example">
+                                                        <a href="{{route('admin.invoices.edit',$invoice->id)}}"
+                                                           class="btn btn-outline-primary box-shadow-3 mr-1 mb-1 btn-sm"><i class="ft-edit"></i></a>
+
+                                                        <a href="{{route('admin.invoices.delete',$invoice->id)}}"
+                                                           class="btn btn-outline-danger box-shadow-3 mr-1 mb-1 btn-sm"><i class="ft-trash-2"></i></a>
+                                                        @if($invoice->status === 0 )
+                                                        <a href="{{route('admin.invoices.showProduct',$invoice->id)}}"
+                                                            class="btn btn-outline-warning box-shadow-3 mr-1 mb-1 btn-sm"><i class="ft-eye"></i></a>
+                                                        @endif
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    @endisset
                                     </tbody>
                                 </table>
+                                
+                                <div class="justify-content-center d-flex">
+
+                                </div>
                             </div>
                         </div>
                     </div>
