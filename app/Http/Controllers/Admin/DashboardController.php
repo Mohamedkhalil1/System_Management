@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Invoice;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
     public function index(){
-        return view('admin.dashboard');
+        $invoices = Invoice::clientInvoices()->orderBy('id','desc')->limit(15)->get();
+        return view('admin.dashboard',compact('invoices'));
     }
 }
