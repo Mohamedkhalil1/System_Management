@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-
+@section('title',"تعديل فاتوره لموظفين")
 @section('content')
 
     <div class="app-content content">

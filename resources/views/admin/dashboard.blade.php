@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-
+@section('title',"الصفحه الرئسيه")
 @section('content')
 
 

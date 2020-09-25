@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-
+@section('title',"تعديل فرع|$branch->name")
 @section('content')
 
     <div class="app-content content">

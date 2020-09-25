@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-
+@section('title',"عرض الموظف | $employee->name")
 @section('content')
 <div class="app-content content">
     <div class="content-wrapper">
