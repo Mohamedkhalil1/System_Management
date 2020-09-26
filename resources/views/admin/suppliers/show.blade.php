@@ -53,7 +53,7 @@
                 <!-- project-info -->
                 <div id="project-info" class="card-body row">
       
-                  <div class="project-info-count col-lg-6 col-md-12">
+                  <div class="project-info-count col-lg-12 col-md-12">
                     <div class="project-info-icon">
                       <h2>{{$supplier->invoices()->count()}}</h2>
                       <div class="project-info-sub-icon">
@@ -64,17 +64,7 @@
                       <h5>عدد الفواتير</h5>
                     </div>
                   </div>
-                  <div class="project-info-count col-lg-6 col-md-12">
-                    <div class="project-info-icon">
-                      <h2>{{$supplier->invoices->count()}}</h2>
-                      <div class="project-info-sub-icon">
-                        <span class="la la-money"></span>
-                      </div>
-                    </div>
-                    <div class="project-info-text pt-1">
-                      <h5>المصروفات</h5>
-                    </div>
-                  </div>
+                
                 </div>
                 <!-- project-info -->
                 
@@ -107,30 +97,18 @@
                                         <tr>
                                             <th>رقم الفاتوره</th>
                                             <th>تاريخ الفاتوره</th>
-                                            <th>العميل</th>
-                                            <th>الإجراءات</th>
+                                            <th>المبلغ</th>
+                                            
                                         </tr>
                                         </thead>
                                         <tbody>
 
                                         @isset($invoices)
-                                            @foreach($products as $product)
+                                            @foreach($invoices as $invoice)
                                                 <tr>
-                                                    <td>{{$product->name}}</td>
-                                                    <td>{{$product->description}}</td>
-                                                    <td>{{$product->price}}</td>
-                                                    <td>{{$product->stock}}</td>
-                                                    <td>
-                                                        <div class="btn-group" role="group"
-                                                                aria-label="Basic example">
-                                                            <a href="{{route('admin.products.edit',$product -> id)}}"
-                                                                class="btn btn-outline-primary box-shadow-3 mr-1 mb-1 btn-sm"><i class="ft-edit"></i></a>
-
-                                                            <a href="{{route('admin.products.delete',$product->id)}}"
-                                                                class="btn btn-outline-danger box-shadow-3 mr-1 mb-1 btn-sm"><i class="ft-trash-2"></i></a>
-
-                                                        </div>
-                                                    </td>
+                                                    <td><a href="{{route('admin.invoices.show',$invoice->id)}}">{{$invoice->id}}<a></td>
+                                                    <td>{{$invoice->date}}</td>
+                                                    <td>{{$invoice->price}}</td>
                                                 </tr>
                                             @endforeach
                                         @endisset
