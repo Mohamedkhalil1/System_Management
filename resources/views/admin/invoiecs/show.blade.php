@@ -104,6 +104,27 @@
             {{ $details->links() }}
           </div>
         </section>
+
+        <div class="row">
+          <div class="col-md-7 col-sm-12 text-center text-md-left">
+          </div>
+          <div class="col-md-5 col-sm-12">
+            <p class="lead">المجموع</p>
+            <div class="table-responsive">
+              <table class="table">
+                <tbody>
+                  <tr>
+                    <td>المبلغ</td>
+                    <td class="text-right">{{$invoice->price}} ج</td>
+                  </tr>
+                  
+                </tbody>
+              </table>
+            </div>
+            
+          </div>
+        </div>
+        
       </div>
     </div>
   </div>

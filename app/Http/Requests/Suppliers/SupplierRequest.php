@@ -26,7 +26,7 @@ class SupplierRequest extends FormRequest
         return [
             'name' => 'required|max:20',
             'address' => 'required',
-            'phone' => 'required|numeric|max:15|min:11',
+            'phone' => 'required|numeric',
             'email' => 'nullable|email|max:50',
         ];
     }
@@ -38,8 +38,8 @@ class SupplierRequest extends FormRequest
             'address.required' => 'يجب ادخال عنوان المزود',
             'phone.required' => 'يجب ادخال رقم الهاتف الخاص بالمزود',
             'phone.numeric' => 'رقم الهاتف يجب ان يكون مجموعه ارقام',
-            'phone.max' => 'يجب ان يكون رقم الهاتف لا يزيد عن 15 رقم',
-            'phone.min' => 'لا يجب ان يكون رقم الهاتف اقل من 11 رقم', 
+            //'phone.max' => 'يجب ان يكون رقم الهاتف لا يزيد عن 15 رقم',
+            //'phone.min' => 'لا يجب ان يكون رقم الهاتف اقل من 11 رقم', 
             'email.email' => 'البريد الالكتروني غير صحيح',
             'email.max' => 'لا يجب ان يزيد البريد الالكتروني عن 50 حرف'
         ];
