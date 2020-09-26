@@ -96,6 +96,7 @@
                                         <tr>
                                             <th>رقم الفاتوره</th>
                                             <th>تاريخ الفاتوره</th>
+                                            <th>المبلغ</th>
                                             <th>السبب</th>
                                             <th>الإجراءات</th>
                                         </tr>
@@ -107,6 +108,7 @@
                                                 <tr>
                                                     <td>{{$invoice->id}}</td>
                                                     <td>{{$invoice->date}}</td>
+                                                    <td>{{$invoice->price}} ج</td>
                                                     <td>{{$invoice->type}}</td>
                                                     
                                                     <td>

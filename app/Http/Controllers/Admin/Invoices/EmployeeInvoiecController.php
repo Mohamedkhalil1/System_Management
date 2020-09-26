@@ -62,11 +62,11 @@ class EmployeeInvoiecController extends Controller
         try{
             $params = $request->except('_token');
             $employee = Employee::find($request->employee_id);
-            $params['brach_id'] = $employee->branch->id; 
+            $params['branch_id'] = $employee->branch->id; 
             Invoice::employeeInvoices()->findOrFail($id)->update($params);
             return redirect()->route('admin.employeesInvoice')->with(['success' => 'تم تحديث فاتوره بنجاح']);
         }catch(\Exception $ex){
-           
+            dd($ex);
             return redirect()->route('admin.employeesInvoice')->with(['error' => 'حدث مشكله جرب مره اخرى']);
         }
       
