@@ -101,7 +101,7 @@
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label for="projectinput1"> الكميه </label>
-                                                            <input type="number"
+                                                            <input type="number" data-bts-init-val="VALUE"
                                                                     class="form-control"
                                                                     placeholder="كميه المنتج"
                                                                     value="{{old('stock')}}"

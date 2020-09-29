@@ -130,16 +130,25 @@ Route::group(
             ## end Invoice Employees Routes 
 
 
-                  ## Invoice Suppliers Routes 
-                  Route::group(['namespace' =>'Invoices','prefix' => 'suppliersInvoice'], function () {
-                    Route::get('/','SupplierInvoiecController@index')->name('admin.suppliersInvoice');
-                    Route::get('/create','SupplierInvoiecController@create')->name('admin.suppliersInvoice.create');
-                    Route::post('/','SupplierInvoiecController@store')->name('admin.suppliersInvoice.store');
-                    Route::get('/edit/{id}','SupplierInvoiecController@edit')->name('admin.suppliersInvoice.edit');
-                    Route::put('/{id}','SupplierInvoiecController@update')->name('admin.suppliersInvoice.update');
-                    Route::get('delete/{id}','SupplierInvoiecController@destroy')->name('admin.suppliersInvoice.delete');
-                });
-                ## end Invoice Suppliers Routes 
+            ## Invoice Suppliers Routes 
+            Route::group(['namespace' =>'Invoices','prefix' => 'suppliersInvoice'], function () {
+                Route::get('/','SupplierInvoiecController@index')->name('admin.suppliersInvoice');
+                Route::get('/create','SupplierInvoiecController@create')->name('admin.suppliersInvoice.create');
+                Route::post('/','SupplierInvoiecController@store')->name('admin.suppliersInvoice.store');
+                Route::get('/edit/{id}','SupplierInvoiecController@edit')->name('admin.suppliersInvoice.edit');
+                Route::put('/{id}','SupplierInvoiecController@update')->name('admin.suppliersInvoice.update');
+                Route::get('delete/{id}','SupplierInvoiecController@destroy')->name('admin.suppliersInvoice.delete');
+            });
+            ## end Invoice Suppliers Routes 
+
+            ## Users Routes 
+
+            Route::group(['namespace' =>'User','prefix' => 'profile'], function () {
+                Route::get('/','UserController@edit')->name('admin.user.edit');
+                Route::put('/','UserController@update')->name('admin.user.update');
+            });
+
+            ## end Users Routes
 
             
             
