@@ -32,6 +32,7 @@ class InvoiecController extends Controller
     
     public function addProduct($id,InvoiceAddProductRequest $request){
         try{
+            DB::beginTransaction();
             $invoice = Invoice::clientInvoices()->findOrfail($id);
             if($invoice->status === 1){
                 return redirect()->route('admin.invoices')->with(['error' => "هذه الفاتوره مدفوعه"]); 
@@ -47,7 +48,6 @@ class InvoiecController extends Controller
             }else{
                
                 $product = Product::findOrFail($request->product_id);
-                
                 InvoiceProduct::create([
                     'price' => $product->price,
                     'quantity' => $request->quantity,
@@ -55,8 +55,10 @@ class InvoiecController extends Controller
                     'invoice_id' => $id
                 ]);
             }
+            DB::commit();
             return redirect()->back()->with(['success' => 'تم اضافه المنتج لفاتوره']);
         }catch(\Exception $ex){
+            DB::rollback();
             dd($ex);
             return redirect()->route('admin.invoices')->with(['error' => 'حدث مشكله جرب مره اخرى']);
         }
@@ -106,7 +108,7 @@ class InvoiecController extends Controller
             if($invoice->status === 1){
                 return redirect()->route('admin.invoices')->with(['error' => "هذه الفاتوره مدفوعه"]); 
             }
-            $products = Product::select()->paginate(PAGINATION_COUNT);
+            $products = Product::select()->where('branch_id',$invoice->branch_id)->paginate(PAGINATION_COUNT);
             return view('admin.invoiecs.products',compact('products','invoice'));
         }catch(\Exception $ex){
             return redirect()->route('admin.invoices')->with(['error' => 'حدث مشكله جرب مره اخرى']);
